@@ -17,7 +17,7 @@ apply plugin: "org.springframework.boot"
 apply plugin: "io.spring.dependency-management"
 
 group = "com.study.project"
-version = "1.0-SNAPSHOT"
+version = "1.0-SNAPSHOT"+new Date().format("yyyyMMddHHmmss")
 
 repositories {
     mavenCentral()
@@ -28,7 +28,8 @@ dependencies {
     implementation('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-    implementation('com.h2database:h2')
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
+    implementation('org.mariadb.jdbc:mariadb-java-client')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 

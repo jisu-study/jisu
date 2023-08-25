@@ -18,7 +18,8 @@ public class Plan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="plan_id")//DB column명과 매핑되도록
+    private Long planId;
 
     @Column(nullable = false)
     private String title;
@@ -26,32 +27,34 @@ public class Plan {
     @Column(nullable = false)
     private String location;
 
-    @Column(nullable = false)
-    private Date start_date;
+    @Column(nullable = false, name = "start_date")
+    private Date startDate;
 
-    @Column(nullable = false)
-    private Date end_date;
+    @Column(nullable = false, name = "end_date")
+    private Date endDate;
 
-    @Column(nullable = false)
-    private int trip_state;
+    @Column(nullable = false, name = "trip_state")
+    private int tripState;
 
     private BigDecimal budget;
 
     // 다대일 양방향이기 때문에 각 plan 별 datePlan을 저장할 list
+    //plan은 DatePlan entity에서 Plan field value의 이름
     @OneToMany(mappedBy = "plan", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<DatePlan> datePlans = new ArrayList<>();
+    private List<DatePlan> datePlans = new ArrayList<DatePlan>();
 
     public void putDatePlan(DatePlan datePlan){
-        this.datePlans.addAll((Collection<? extends DatePlan>) datePlan);
+
+        this.datePlans.add(datePlan);
     }
 
     @Builder
-    public Plan(String title, String location, Date start_date, Date end_date, int trip_state, BigDecimal budget){
+    public Plan(String title, String location, Date startDate, Date endDate, int tripState, BigDecimal budget){
         this.title = title;
         this.location = location;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.trip_state = trip_state;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tripState = tripState;
         this.budget = budget;
     }
 }

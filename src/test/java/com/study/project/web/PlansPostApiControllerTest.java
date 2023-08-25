@@ -50,58 +50,55 @@ public class PlansPostApiControllerTest {
     public void plan_save() throws Exception {
         String title = "대만 여행";
         String location = "타이페이";
-        Date start_date = Date.valueOf("2023-03-12");
-        Date end_date = Date.valueOf("2023-03-15");
-        int trip_state = 0;
+        Date startDate = Date.valueOf("2023-03-12");
+        Date endDate = Date.valueOf("2023-03-15");
+        int tripState = 0;
         BigDecimal budget = BigDecimal.valueOf(798915.00);
 
         Plan p = Plan.builder()
                 .title(title)
                 .location(location)
-                .start_date(start_date)
-                .end_date(end_date)
-                .trip_state(trip_state)
+                .startDate(startDate)
+                .endDate(endDate)
+                .tripState(tripState)
                 .budget(budget).build();
 
         List<DatePlanSaveRequestDto> datePlanSaveRequestDtos = new ArrayList<>();
 
         int date1 = 1;
-        Time start_time1 = Time.valueOf("06:10:00");
-        Time end_time1 = Time.valueOf("08:00:00");
-        String tour_spot1 = "타이페이공항";
+        Time startTime1 = Time.valueOf("06:10:00");
+        Time endTime1 = Time.valueOf("08:00:00");
+        String tourSpot1 = "타이페이공항";
         String content1 = "인천공항에서 타이페이공항으로 이동";
 
         int date2 = 2;
-        Time start_time2 = Time.valueOf("17:00:00");
-        Time end_time2 = Time.valueOf("19:00:00");
-        String tour_spot2 = "타이페이101 전망대";
+        Time startTime2 = Time.valueOf("17:00:00");
+        Time endTime2 = Time.valueOf("19:00:00");
+        String tourSpot2 = "타이페이101 전망대";
         String content2 = "야경 구경하기";
         BigDecimal cost2 = BigDecimal.valueOf(23000.00);
 
         datePlanSaveRequestDtos.add(DatePlanSaveRequestDto.builder()
                 .date(date1)
-                .plan(p)
-                .start_time(start_time1)
-                .end_time(end_time1)
-                .tour_spot(tour_spot1)
+                .startTime(startTime1)
+                .endTime(endTime1)
+                .tourSpot(tourSpot1)
                 .content(content1).build());
         datePlanSaveRequestDtos.add(DatePlanSaveRequestDto.builder()
                 .date(date2)
-                .plan(p)
-                .start_time(start_time2)
-                .end_time(end_time2)
-                .tour_spot(tour_spot2)
+                .startTime(startTime2)
+                .endTime(endTime2)
+                .tourSpot(tourSpot2)
                 .content(content2)
                 .cost(cost2).build());
 
         PlanSaveRequestDto requestDto = PlanSaveRequestDto.builder()
                 .title(title)
                 .location(location)
-                .start_date(start_date)
-                .end_date(end_date)
-                .trip_state(trip_state)
+                .startDate(startDate)
+                .endDate(endDate)
+                .tripState(tripState)
                 .budget(budget)
-                .datePlanSaveRequestDtos(datePlanSaveRequestDtos)
                 .build();
 
         String url ="http://localhost:" + port +"/api/v1/plans";
@@ -116,9 +113,9 @@ public class PlansPostApiControllerTest {
         Plan plan = planList.get(0);
         assertThat(plan.getTitle()).isEqualTo(title);
         assertThat(plan.getLocation()).isEqualTo(location);
-        assertThat(plan.getStart_date()).isEqualTo(start_date);
-        assertThat(plan.getEnd_date()).isEqualTo(end_date);
-        assertThat(plan.getTrip_state()).isEqualTo(trip_state);
+        assertThat(plan.getStartDate()).isEqualTo(startDate);
+        assertThat(plan.getEndDate()).isEqualTo(endDate);
+        assertThat(plan.getTripState()).isEqualTo(tripState);
         //BigDecimal 값 비교할 때는 isEqualByComparingTo
         assertThat(plan.getBudget()).isEqualByComparingTo(budget);
         assertThat(plan.getDatePlans()).usingRecursiveComparison().isEqualTo(datePlanSaveRequestDtos);

@@ -1,5 +1,7 @@
 package com.study.project.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.study.project.domain.plans.DatePlan;
 import com.study.project.domain.plans.Plan;
 import jakarta.persistence.*;
@@ -17,30 +19,32 @@ import java.util.List;
 public class DatePlanSaveRequestDto {
     private Plan plan;
     private int date;
-    private Time start_time;
-    private Time end_time;
-    private String tour_spot;
+    private Time startTime;
+    private Time endTime;
+    private String tourSpot;
     private String content;
     private BigDecimal cost;
 
     @Builder
-    public DatePlanSaveRequestDto(Plan plan, int date, Time start_time, Time end_time, String tour_spot, String content, BigDecimal cost){
-        this.plan = plan;
+    public DatePlanSaveRequestDto(int date, Time startTime, Time endTime, String tourSpot, String content, BigDecimal cost){
         this.date = date;
-        this.start_time = start_time;
-        this.end_time = end_time;
-        this.tour_spot = tour_spot;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.tourSpot = tourSpot;
         this.content = content;
         this.cost = cost;
     }
 
+    public void setPlan(Plan plan){
+        this.plan = plan;
+    }
+
     public DatePlan toEntity(){
         return DatePlan.builder()
-                .plan(plan)
                 .date(date)
-                .start_time(start_time)
-                .end_time(end_time)
-                .tour_spot(tour_spot)
+                .startTime(startTime)
+                .endTime(endTime)
+                .tourSpot(tourSpot)
                 .content(content)
                 .cost(cost)
                 .build();

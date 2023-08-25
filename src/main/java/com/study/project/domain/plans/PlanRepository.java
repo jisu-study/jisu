@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PlanRepository extends JpaRepository<Plan, Long> {
-    //@Query("SELECT p FROM Posts p ORDER BY p.id DESC")
-    //List<Plan> findAllDesc();
+    @Query(value = "SELECT p FROM Plan p ORDER BY p.id DESC", nativeQuery = true)
+    List<Plan> findAllDesc();
 }

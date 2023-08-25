@@ -18,30 +18,34 @@ import java.util.List;
 public class PlanSaveRequestDto {
     private String title;
     private String location;
-    private Date start_date;
-    private Date end_date;
-    private int trip_state;
+    private Date startDate;
+    private Date endDate;
+    private int tripState;
     private BigDecimal budget;
-    private List<DatePlanSaveRequestDto> datePlanSaveRequestDtos;
+    private List<DatePlan> datePlans = new ArrayList<DatePlan>();
+
+    public void putDatePlan(DatePlan datePlan){
+        this.datePlans.add(datePlan);
+    }
 
     @Builder
-    public PlanSaveRequestDto(String title, String location, Date start_date, Date end_date, int trip_state, BigDecimal budget, List<DatePlanSaveRequestDto> datePlanSaveRequestDtos){
+    public PlanSaveRequestDto(String title, String location, Date startDate, Date endDate, int tripState, BigDecimal budget, List<DatePlan> datePlans){
         this.title = title;
         this.location = location;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.trip_state = trip_state;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tripState = tripState;
         this.budget = budget;
-        this.datePlanSaveRequestDtos = datePlanSaveRequestDtos;
+        this.datePlans = datePlans;
     }
 
     public Plan toEntity(){
         return Plan.builder()
                 .title(title)
                 .location(location)
-                .start_date(start_date)
-                .end_date(end_date)
-                .trip_state(trip_state)
+                .startDate(startDate)
+                .endDate(endDate)
+                .tripState(tripState)
                 .budget(budget)
                 .build();
     }
