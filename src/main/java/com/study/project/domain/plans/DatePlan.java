@@ -16,8 +16,8 @@ import java.sql.Time;
 //java의 경우 Camel 표기법으로 명명 권고, DB는 _ 사용
 public class DatePlan {
     //plan table과 dateplan table 다대일 양방향 mapping 관계
-    @ManyToOne
-    @JoinColumn(name = "plan_plan_id")//name 값은 table이름_pk이름
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "plan_id")//name 값은 table이름_pk이름
     private Plan plan;
 
     //복합키 구현 복잡해
@@ -46,6 +46,10 @@ public class DatePlan {
     private String content;
 
     private BigDecimal cost;
+
+    public void setPlan(Plan plan){
+        this.plan = plan;
+    }
 
     @Builder
     public DatePlan(Plan plan, int date, Time startTime, Time endTime, String tourSpot, String content, BigDecimal cost){

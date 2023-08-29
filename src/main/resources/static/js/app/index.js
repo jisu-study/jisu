@@ -66,7 +66,7 @@ var main = {
             data: JSON.stringify(allData)
         }).done(function() {
             alert('글이 등록되었습니다.');
-            window.location.href = '/plans/board';
+            window.location.href = '/plans/save';
         }).fail(function(error) {
             alert(JSON.stringify(allData));
         });

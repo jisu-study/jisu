@@ -24,19 +24,16 @@ public class PlanSaveRequestDto {
     private BigDecimal budget;
     private List<DatePlan> datePlans = new ArrayList<DatePlan>();
 
-    public void putDatePlan(DatePlan datePlan){
-        this.datePlans.add(datePlan);
-    }
 
     @Builder
-    public PlanSaveRequestDto(String title, String location, Date startDate, Date endDate, int tripState, BigDecimal budget, List<DatePlan> datePlans){
+    public PlanSaveRequestDto(String title, String location, Date startDate, Date endDate, int tripState, BigDecimal budget){
         this.title = title;
         this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
         this.tripState = tripState;
         this.budget = budget;
-        this.datePlans = datePlans;
+        this.datePlans = new ArrayList<DatePlan>();
     }
 
     public Plan toEntity(){

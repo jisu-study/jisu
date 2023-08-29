@@ -44,8 +44,8 @@ public class Plan {
     private List<DatePlan> datePlans = new ArrayList<DatePlan>();
 
     public void putDatePlan(DatePlan datePlan){
-
         this.datePlans.add(datePlan);
+        datePlan.setPlan(this);
     }
 
     @Builder

@@ -1,8 +1,6 @@
 package com.study.project.service;
 
-import com.study.project.domain.plans.DatePlan;
-import com.study.project.domain.plans.DatePlanRepository;
-import com.study.project.domain.plans.PlanRepository;
+import com.study.project.domain.plans.*;
 import com.study.project.domain.plans.PlanRepository;
 import com.study.project.web.dto.DatePlanSaveRequestDto;
 import com.study.project.web.dto.PlanSaveRequestDto;
@@ -22,12 +20,17 @@ public class PlanService {
 
     @Transactional
     public Long save(PlanSaveRequestDto requestDto, List<DatePlanSaveRequestDto> dpRequestDtoList) {
-        for (int i=0; i<dpRequestDtoList.size(); i++) {
-            dpRequestDtoList.get(i).setPlan(requestDto.toEntity());
-            datePlanRepository.save(dpRequestDtoList.get(i).toEntity());
-            requestDto.putDatePlan(dpRequestDtoList.get(i).toEntity());
+        Plan plan = requestDto.toEntity();
+        planRepository.save(plan);
+
+        for (DatePlanSaveRequestDto dpRequestDto : dpRequestDtoList) {
+            DatePlan datePlan = dpRequestDto.toEntity();
+            datePlan.setPlan(plan);
+            plan.putDatePlan(datePlan);
+            datePlanRepository.save(datePlan);
         }
-        return planRepository.save(requestDto.toEntity()).getPlanId();
+
+        return plan.getPlanId();
     }
 
     //예산 합계 함수 추가해주기

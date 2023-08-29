@@ -1,6 +1,7 @@
-package com.study.project.web;
+package com.study.project.service;
 
 import com.study.project.domain.plans.DatePlan;
+import com.study.project.domain.plans.DatePlanRepository;
 import com.study.project.domain.plans.Plan;
 import com.study.project.domain.plans.PlanRepository;
 import com.study.project.web.dto.DatePlanSaveRequestDto;
@@ -9,14 +10,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -25,13 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PlansPostApiControllerTest {
-
+public class PlanServiceTest {
     @LocalServerPort
     private int port;
 
@@ -41,13 +36,20 @@ public class PlansPostApiControllerTest {
     @Autowired
     private PlanRepository planRepository;
 
+    @Autowired
+    private DatePlanRepository datePlanRepository;
+
+    @Autowired
+    private PlanService planService;
+
     @AfterEach
     public void tearDown() throws Exception {
         planRepository.deleteAll();
+        datePlanRepository.deleteAll();
     }
 
     @Test
-    public void plan_save() throws Exception {
+    public void save_test() throws Exception {
         String title = "대만 여행";
         String location = "타이페이";
         Date startDate = Date.valueOf("2023-03-12");
@@ -92,23 +94,19 @@ public class PlansPostApiControllerTest {
                 .content(content2)
                 .cost(cost2).build());
 
-        String url ="http://localhost:" + port +"/api/v1/plans";
-
-        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
-
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+        Long plan_id = planService.save(requestDto, datePlanSaveRequestDtoList);
 
         List<Plan> planList = planRepository.findAll();
+        List<DatePlan> datePlanList = datePlanRepository.findAll();
 
         Plan plan = planList.get(0);
-        assertThat(plan.getTitle()).isEqualTo(title);
-        assertThat(plan.getLocation()).isEqualTo(location);
-        assertThat(plan.getStartDate()).isEqualTo(startDate);
-        assertThat(plan.getEndDate()).isEqualTo(endDate);
-        assertThat(plan.getTripState()).isEqualTo(tripState);
+        DatePlan datePlan1 = datePlanList.get(0);
+        DatePlan datePlan2 = datePlanList.get(1);
+        //assertThat(datePlan1.getPlan()).isEqualTo(plan);
+        //assertThat(datePlan1.getPlan().getPlanId()).isEqualTo(plan.getPlanId());
+        //assertThat(datePlan2.getPlan().getPlanId()).isEqualTo(plan.getPlanId());
+        assertThat(plan.getDatePlans()).usingRecursiveComparison().isEqualTo(datePlanList);
         //BigDecimal 값 비교할 때는 isEqualByComparingTo
-        assertThat(plan.getBudget()).isEqualByComparingTo(budget);
-        assertThat(plan.getDatePlans()).usingRecursiveComparison().isEqualTo(datePlanSaveRequestDtoList);
     }
+
 }

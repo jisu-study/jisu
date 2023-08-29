@@ -26,7 +26,8 @@ public class DatePlanSaveRequestDto {
     private BigDecimal cost;
 
     @Builder
-    public DatePlanSaveRequestDto(int date, Time startTime, Time endTime, String tourSpot, String content, BigDecimal cost){
+    public DatePlanSaveRequestDto(Plan plan, int date, Time startTime, Time endTime, String tourSpot, String content, BigDecimal cost){
+        this.plan = plan;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -35,12 +36,9 @@ public class DatePlanSaveRequestDto {
         this.cost = cost;
     }
 
-    public void setPlan(Plan plan){
-        this.plan = plan;
-    }
-
     public DatePlan toEntity(){
         return DatePlan.builder()
+                .plan(plan)
                 .date(date)
                 .startTime(startTime)
                 .endTime(endTime)
