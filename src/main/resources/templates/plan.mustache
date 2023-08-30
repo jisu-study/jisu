@@ -53,12 +53,13 @@
         </div>
 
         <table>
-            <form>
-                <input type="text" class="form-control" name="dates" placeholder="여행 일차">
-            </form>
-            <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-new-row">행 추가</button>
-
             <thead>
+                <tr>
+                    <form>
+                        <input type="text" class="form-control" name="dates" placeholder="여행 일차">
+                    </form>
+                    <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-new-row">행 추가</button>
+                </tr>
                 <tr>
                     <th scope="col">장소</th>
                     <th scope="col">계획 세부 내용</th>
@@ -67,7 +68,7 @@
                     <th scope="col">비용</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody name="plan_table">
                 <tr>
                     <td>
                         <form>

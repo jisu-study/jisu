@@ -15,13 +15,17 @@ var main = {
         })
     },
     new_row : function() {
+        var table_body = document.getElementsByName("plan_table")[0];
+        var first_tr = table_body.firstElementChild;
+        var new_tr = first_tr.cloneNode(true);
 
-        //입력 field 초기화
-        $("#location").val("");
-        $("#content").val("");
-        $("#start-time").val("");
-        $("#end-time").val("");
-        $("#cost").val("");
+        var tmps = new_tr.children;
+        for (var i=0; i<tmps.length; i++){
+            var tmp = tmps[i].firstElementChild;
+            tmp.reset();
+        }
+
+        table_body.appendChild(new_tr);
     },
     save : function() {
 
