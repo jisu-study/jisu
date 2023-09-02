@@ -8,11 +8,14 @@ var main = {
             _this.save();
         });
         $('#btn-update').on('click', function() {
-            _this.update();a
+            _this.update();
         });
         $('#btn-delete').on('click', function() {
             _this.delete();
-        })
+        });
+        $('[name="btn-delete-row"]').on('click', function() {
+            _this.deleteRow($(this));
+        });
     },
     new_row : function() {
         var table_body = document.getElementsByName("plan_table")[0];
@@ -26,6 +29,19 @@ var main = {
         }
 
         table_body.appendChild(new_tr);
+
+        $(new_tr).find('[name="btn-delete-row"]').on('click', function() {
+            main.deleteRow($(this));
+        });
+    },
+    deleteRow : function(button) {
+        if(button.closest('tbody').children().length == 1) {
+            alert('삭제할 수 없습니다.');
+        }
+        else {
+            var tableRow = button.closest('tr');
+            tableRow.remove();
+        }
     },
     save : function() {
 
