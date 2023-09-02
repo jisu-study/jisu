@@ -20,7 +20,7 @@ var main = {
         var new_tr = first_tr.cloneNode(true);
 
         var tmps = new_tr.children;
-        for (var i=0; i<tmps.length; i++){
+        for (var i=0; i<(tmps.length-1); i++){
             var tmp = tmps[i].firstElementChild;
             tmp.reset();
         }
@@ -37,22 +37,23 @@ var main = {
             tripState: $('select[name="state"]').val()
         };
 
+        var table_name = '#table1 '
         var datePlans = [];
-        var date = $('[name="dates"]');
-        var tour_spots = $('[name="tour_spots"]');
-        var contents = $('[name="contents"]');
-        var start_times = $('[name="start_times"]');
-        var end_times = $('[name="end_times"]');
-        var costs = $('[name="costs"]');
+        var date = $(table_name+'input[name="dates"]');
+        var tour_spots = $(table_name+'input[name="tour_spots"]');
+        var contents = $(table_name+'input[name="contents"]');
+        var start_times = $(table_name+'input[name="start_times"]');
+        var end_times = $(table_name+'input[name="end_times"]');
+        var costs = $(table_name+'input[name="costs"]');
 
         for (var i=0 ; i<tour_spots.length; i++){
             var datePlan = {
-                date: date[i].value,
-                tourSpot: tour_spots[i].value,
-                content: contents[i].value,
-                startTime: start_times[i].value+":00",
-                endTime: end_times[i].value+":00",
-                cost: costs[i].value
+                date: date.val(),
+                tourSpot: tour_spots.eq(i).val(),
+                content: contents.eq(i).val(),
+                startTime: start_times.eq(i).val()+":00",
+                endTime: end_times.eq(i).val()+":00",
+                cost: costs.eq(i).val()
             };
             datePlans.push(datePlan);
         }
