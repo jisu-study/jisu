@@ -1,9 +1,6 @@
 var main = {
     init : function() {
         var _this = this;
-        $('#btn-new-row').on('click', function() {
-            _this.new_row();
-        });
         $('#btn-save').on('click', function() {
             _this.save();
         });
@@ -12,6 +9,9 @@ var main = {
         });
         $('#btn-delete').on('click', function() {
             _this.delete();
+        });
+        $('[name="btn-new-row"]').on('click', function() {
+            _this.new_row($(this));
         });
         $('[name="btn-delete-row"]').on('click', function() {
             _this.deleteRow($(this));

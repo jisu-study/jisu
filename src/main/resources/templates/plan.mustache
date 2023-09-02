@@ -50,15 +50,21 @@
             <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-save">
                 저장
             </button>
+            <button id="btn-add-table" class="btn btn-primary">새 테이블 추가</button>
         </div>
+        <br>
 
         <table id="table1">
             <thead>
                 <tr>
-                    <form>
-                        <input type="text" class="form-control" name="dates" placeholder="여행 일차">
-                    </form>
-                    <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-new-row">행 추가</button>
+                    <th scope="col">
+                        <form>
+                            <input type="text" class="form-control" name="dates" placeholder="여행 일차">
+                        </form>
+                    </th>
+                    <th scope="col">
+                        <button class="btn btn-primary d-inline-flex align-items-center" type="button" name="btn-new-row">행 추가</button>
+                    </th>
                 </tr>
                 <tr>
                     <th scope="col">장소</th>
@@ -131,5 +137,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script src="/js/app/index.js"></script>
+<script src="/js/app/manageTable.js"></script>
 </body>
 </html>
