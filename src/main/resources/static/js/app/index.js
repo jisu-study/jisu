@@ -17,18 +17,18 @@ var main = {
             _this.deleteRow($(this));
         });
     },
-    new_row : function() {
-        var table_body = document.getElementsByName("plan_table")[0];
-        var first_tr = table_body.firstElementChild;
-        var new_tr = first_tr.cloneNode(true);
+    new_row : function(button) {
+        var table_body = button.closest('table').find('tbody[name="plan_table"]').eq(0);
+        var first_tr = table_body.find('tr:first').eq(0);
+        var new_tr = first_tr.clone();
 
-        var tmps = new_tr.children;
+        var tmps = new_tr.find('input');
         for (var i=0; i<(tmps.length-1); i++){
-            var tmp = tmps[i].firstElementChild;
-            tmp.reset();
+            var tmp = tmps.eq(i);
+            tmp.val('');
         }
 
-        table_body.appendChild(new_tr);
+        table_body.append(new_tr);
 
         $(new_tr).find('[name="btn-delete-row"]').on('click', function() {
             main.deleteRow($(this));
