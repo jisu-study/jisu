@@ -53,25 +53,29 @@ var main = {
             tripState: $('select[name="state"]').val()
         };
 
-        var table_name = '#table1 '
+        var tableCounter = $('table').length - 1;
         var datePlans = [];
-        var date = $(table_name+'input[name="dates"]');
-        var tour_spots = $(table_name+'input[name="tour_spots"]');
-        var contents = $(table_name+'input[name="contents"]');
-        var start_times = $(table_name+'input[name="start_times"]');
-        var end_times = $(table_name+'input[name="end_times"]');
-        var costs = $(table_name+'input[name="costs"]');
+        for (var j=1; j<=tableCounter; j++){
+            var table_name = '#table'+j+' ';
 
-        for (var i=0 ; i<tour_spots.length; i++){
-            var datePlan = {
-                date: date.val(),
-                tourSpot: tour_spots.eq(i).val(),
-                content: contents.eq(i).val(),
-                startTime: start_times.eq(i).val()+":00",
-                endTime: end_times.eq(i).val()+":00",
-                cost: costs.eq(i).val()
-            };
-            datePlans.push(datePlan);
+            var date = $(table_name+'input[name="dates"]');
+            var tour_spots = $(table_name+'input[name="tour_spots"]');
+            var contents = $(table_name+'input[name="contents"]');
+            var start_times = $(table_name+'input[name="start_times"]');
+            var end_times = $(table_name+'input[name="end_times"]');
+            var costs = $(table_name+'input[name="costs"]');
+
+            for (var i=0 ; i<tour_spots.length; i++){
+                var datePlan = {
+                    date: date.val(),
+                    tourSpot: tour_spots.eq(i).val(),
+                    content: contents.eq(i).val(),
+                    startTime: start_times.eq(i).val()+":00",
+                    endTime: end_times.eq(i).val()+":00",
+                    cost: costs.eq(i).val()
+                };
+                datePlans.push(datePlan);
+            }
         }
 
         var allData = {
