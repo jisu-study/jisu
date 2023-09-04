@@ -1,3 +1,5 @@
+import { calculateBudget } from './calculateBudget.js';
+
 var tableCounter = 1; // 새 테이블의 카운터 초기값
 
 $(document).ready(function() {
@@ -44,18 +46,4 @@ function newTable(newTableId) {
 
     // 복제한 테이블과 삭제 버튼을 컨테이너에 추가
     $('#table'+(tableCounter-1)).after(deleteButton, clonedTable);
-}
-
-function calculateBudget() {
-    var budget = 0;
-    var costs = $('input[name="costs"]');
-
-    for(var i=0; i<costs.length; i++) {
-        var cost = costs.eq(i).val()
-        if(!(cost=="" || cost==null || cost==undefined || (cost!=null && typeof cost=="object" && !Object.keys(cost).length))){
-            budget += parseInt(cost);
-        }
-    }
-
-    $('#budget').text(budget);
 }

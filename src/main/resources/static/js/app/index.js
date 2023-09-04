@@ -1,8 +1,11 @@
+import { calculateBudget } from './calculateBudget.js';
+
 var main = {
     init : function() {
         var _this = this;
         $('#btn-save').on('click', function() {
             _this.save();
+            calculateBudget();
         });
         $('#btn-update').on('click', function() {
             _this.update();
