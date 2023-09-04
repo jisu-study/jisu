@@ -23,7 +23,7 @@ var main = {
         var new_tr = first_tr.clone();
 
         var tmps = new_tr.find('input');
-        for (var i=0; i<(tmps.length-1); i++){
+        for (var i=0; i<tmps.length; i++){
             var tmp = tmps.eq(i);
             tmp.val('');
         }
@@ -50,7 +50,8 @@ var main = {
             location: $('#location').val(),
             startDate: $('#start_date').val(),
             endDate: $('#end_date').val(),
-            tripState: $('select[name="state"]').val()
+            tripState: $('select[name="state"]').val(),
+            budget: $('#budget').val()
         };
 
         var tableCounter = $('table').length - 1;

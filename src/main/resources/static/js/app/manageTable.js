@@ -6,13 +6,15 @@ $(document).ready(function() {
         var tableId = 'table' + tableCounter;
 
         // 테이블 복사 및 추가 함수 호출
-        copyAndAddTable(tableId);
+        newTable(tableId);
         tableCounter++; // 테이블 카운터 증가
     });
+
+    $('#btn-budget').on('click', function() {calculateBudget();});
 });
 
 // 테이블 복사 및 추가하는 함수
-function copyAndAddTable(newTableId) {
+function newTable(newTableId) {
     // 기존의 table1을 복사
     var clonedTable = $('#table1').clone(true);
 
@@ -21,6 +23,12 @@ function copyAndAddTable(newTableId) {
 
     // 기존 테이블의 추가 행 제거
     clonedTable.find('tbody[name="plan_table"] tr:not(:first)').remove();
+
+    var tmps = clonedTable.find('input');
+    for (var i=0; i<tmps.length; i++){
+        var tmp = tmps.eq(i);
+        tmp.val('');
+    }
 
     // 삭제 버튼 추가
     var deleteButton = $('<button>', {
@@ -36,4 +44,18 @@ function copyAndAddTable(newTableId) {
 
     // 복제한 테이블과 삭제 버튼을 컨테이너에 추가
     $('#table'+(tableCounter-1)).after(deleteButton, clonedTable);
+}
+
+function calculateBudget() {
+    var budget = 0;
+    var costs = $('input[name="costs"]');
+
+    for(var i=0; i<costs.length; i++) {
+        var cost = costs.eq(i).val()
+        if(!(cost=="" || cost==null || cost==undefined || (cost!=null && typeof cost=="object" && !Object.keys(cost).length))){
+            budget += parseInt(cost);
+        }
+    }
+
+    $('#budget').text(budget);
 }
