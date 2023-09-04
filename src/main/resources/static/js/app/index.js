@@ -51,7 +51,7 @@ var main = {
             startDate: $('#start_date').val(),
             endDate: $('#end_date').val(),
             tripState: $('select[name="state"]').val(),
-            budget: $('#budget').val()
+            budget: parseFloat($('#budget').text())
         };
 
         var tableCounter = $('table').length - 1;
