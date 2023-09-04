@@ -3,13 +3,16 @@ package com.study.project.service;
 import com.study.project.domain.plans.*;
 import com.study.project.domain.plans.PlanRepository;
 import com.study.project.web.dto.DatePlanSaveRequestDto;
+import com.study.project.web.dto.PlanListResponseDto;
 import com.study.project.web.dto.PlanSaveRequestDto;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional; 이거 바꿨다고 다시 저장 안 되진 않겠지
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -31,6 +34,12 @@ public class PlanService {
         }
 
         return plan.getPlanId();
+    }
+
+    @Transactional(readOnly = true)
+    public List<PlanListResponseDto> findAllDesc() {
+        return planRepository.findAllDesc().stream()
+                .map(PlanListResponseDto::new).collect(Collectors.toList());
     }
 
     //예산 합계 함수 추가해주기
