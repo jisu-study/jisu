@@ -17,6 +17,9 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/signin")
+    public String logIn() { return "sign-in"; }
+
     @GetMapping("/planboard")
     public String planBoard(Model model){
         model.addAttribute("plans", planService.findAllDesc());

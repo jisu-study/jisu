@@ -3,9 +3,7 @@ if (window.location.pathname === '/planboard') {
     var tripStateElements = document.querySelectorAll('span[data-trip-state]');
     tripStateElements.forEach(function(element) {
         var tripState = parseInt(element.getAttribute('data-trip-state'));
-        console.log(tripState);
         var tripStateText = convertTripStateToText(tripState);
-        console.log(tripStateText)
         element.textContent = tripStateText;
     });
 }
