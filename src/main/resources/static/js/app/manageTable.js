@@ -34,7 +34,7 @@ function newTable(newTableId) {
 
     // 삭제 버튼 추가
     var deleteButton = $('<button>', {
-        text: '삭제',
+        text: '테이블 삭제',
         class: 'btn btn-danger d-inline-flex align-items-center',
         click: function() {
             // 삭제 버튼 클릭 시 해당 테이블 삭제

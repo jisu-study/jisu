@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <!-- HTML link 태그를 활용한 BootStrap 연동 -->
-    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for template -->
-    <link href="./css/headers.css" rel="stylesheet">
-    <link href="./css/makePlan.css" rel="stylesheet">
+{{>layout/header}}
+    <link href="/css/headers.css" rel="stylesheet">
+    <link href="/css/makePlan.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                <img class="bi me-2" width="40" height="32" src="/img/mango.png">
                 <span class="fs-4">망고:Man-go</span>
             </a>
 
@@ -23,40 +17,57 @@
             </ul>
 
             <div class="col-md-3 text-end">
-                <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='sign-in.html'">로그인</button>
+                <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='/signin'">로그인</button>
                 <button type="button" class="btn btn-primary">회원가입</button>
             </div>
         </header>
     </div>
     <div class="wrapper flow">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <form>
-                <input type="text" class="form-control" id="title" placeholder="여행 제목">
-                <input type="text" class="form-control" id="location" placeholder="여행지">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <form class="d-flex flex-gap">
+                    <div class="flex-fill">
+                        제목
+                        <input type="text" class="form-control" id="title" placeholder="여행 제목">
+                    </div>
+                    <div class="flex-fill">
+                        여행지
+                        <input type="text" class="form-control" id="location" placeholder="여행지">
+                    </div>
+                    <div class="flex-fill">
+                        여행 시작일
+                        <input type="date" class="form-control" id="start_date" placeholder="여행 시작일">
+                    </div>
+                    <div class="flex-fill">
+                        여행 종료일
+                        <input type="date" class="form-control" id="end_date" placeholder="여행 종료일">
+                    </div>
+                    <div class="flex-fill">
+                        여행 상태
+                        <select class="form-control" name="state" id="trip_state">
+                            <option value="0">여행 전</option>
+                            <option value="1">여행 중</option>
+                            <option value="2">여행 후</option>
+                        </select>
+                    </div>
+                </form>
                 <div>
-                    여행 시작일
-                    <input type="date" class="form-control" id="start_date" placeholder="여행 시작일">
+                    <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-save">
+                        저장
+                    </button>
                 </div>
-                <div>
-                    여행 종료일
-                    <input type="date" class="form-control" id="end_date" placeholder="여행 종료일">
-                </div>
-                <select class="form-control" name="state" id="trip_state">
-                    <option value="0">여행 전</option>
-                    <option value="1">여행 중</option>
-                    <option value="2">여행 후</option>
-                </select>
-            </form>
-            <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-save">
-                저장
-            </button>
-            <br>
-            <button id="btn-add-table" class="btn btn-primary">새 테이블 추가</button>
+            </div>
         </div>
         <br>
 
-        <table id="table1">
-            <thead>
+        <div class="container">
+            <div>
+                <button id="btn-add-table" class="btn btn-primary">새 테이블 추가</button>
+            </div>
+            <br>
+
+            <table id="table1" class="n-table">
+                <thead>
                 <tr>
                     <th scope="col">
                         <form>
@@ -74,8 +85,8 @@
                     <th scope="col">종료 시각</th>
                     <th scope="col">비용</th>
                 </tr>
-            </thead>
-            <tbody name="plan_table">
+                </thead>
+                <tbody name="plan_table">
                 <tr>
                     <td>
                         <form>
@@ -103,37 +114,36 @@
                         </form>
                     </td>
                     <td>
-                        <button class="btn btn-primary d-inline-flex align-items-center" type="button" name="btn-delete-row">삭제</button>
+                        <button class="btn btn-primary d-inline-flex align-items-center" type="button" name="btn-delete-row">행 삭제</button>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-
+                </tbody>
+            </table>
+        </div>
         <br>
 
-        <table id="budget_table">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-budget">비용 계산</button>
-                    </th>
-                </tr>
+        <div class="container">
+            <div>
+                <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-budget">비용 계산</button>
+                테스트 저장 전 버튼 누르기
+            </div>
+            <br>
+
+            <table id="budget_table">
+                <thead>
                 <tr>
                     <th scope="col">여행 비용</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <td id="budget">0</td>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<script src="/js/app/index.js" type="module"></script>
-<script src="/js/app/manageTable.js" type="module"></script>
-<script src="/js/app/calculateBudget.js" type="module"></script>
-</body>
-</html>
+    <script src="/js/app/index.js" type="module"></script>
+    <script src="/js/app/manageTable.js" type="module"></script>
+    <script src="/js/app/calculateBudget.js" type="module"></script>
+{{>layout/footer}}

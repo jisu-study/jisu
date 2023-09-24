@@ -16,3 +16,16 @@ body {
 caption {
   text-align: start;
 }
+
+.flex-gap > div {
+  margin-right: 20px;
+}
+
+.flex-gap > div:last-child {
+  margin-right: 0;
+}
+
+.n-table {
+  margin-top: 5px;
+  margin-bottom: 50px;
+}
