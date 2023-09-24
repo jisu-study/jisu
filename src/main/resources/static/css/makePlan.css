@@ -29,3 +29,44 @@ caption {
   margin-top: 5px;
   margin-bottom: 50px;
 }
+
+.default-gap {
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.image-slider {
+    position: relative;
+    width: 300px; /* 슬라이더의 너비 조절 */
+    overflow: hidden;
+    text-align: center;
+}
+
+.slide-container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-slider img {
+    max-width: 100%;
+    height: auto;
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#prevButton {
+    left: 10px;
+}
+
+#nextButton {
+    right: 10px;
+}

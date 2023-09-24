@@ -57,6 +57,17 @@
                     </button>
                 </div>
             </div>
+            <div class="default-gap">
+                <label for="images">이미지 업로드</label>
+                <input type="file" class="form-control-file" id="images" name="images[]" multiple="multiple">
+                <div class="image-slider">
+                    <div class="slide-container">
+                        <img id="imagePreview" src="" alt="Image Preview">
+                    </div>
+                    <button id="prevButton" class="slider-button">이전</button>
+                    <button id="nextButton" class="slider-button">다음</button>
+                </div>
+            </div>
         </div>
         <br>
 
@@ -146,4 +157,5 @@
     <script src="/js/app/index.js" type="module"></script>
     <script src="/js/app/manageTable.js" type="module"></script>
     <script src="/js/app/calculateBudget.js" type="module"></script>
+    <script src="/js/app/handleImages.js" type="module"></script>
 {{>layout/footer}}

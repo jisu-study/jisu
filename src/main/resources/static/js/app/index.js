@@ -1,11 +1,13 @@
 import { calculateBudget } from './calculateBudget.js';
+import { uploadImages } from './handleImages.js';
 
 var main = {
     init : function() {
         var _this = this;
         $('#btn-save').on('click', function() {
-            _this.save();
             calculateBudget();
+            _this.save();
+            _this.uploadImages
         });
         $('#btn-update').on('click', function() {
             _this.update();
