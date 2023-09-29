@@ -1,13 +1,12 @@
 import { calculateBudget } from './calculateBudget.js';
-import { uploadImages } from './handleImages.js';
+import { saveImage } from './handleImages.js';
 
 var main = {
     init : function() {
         var _this = this;
         $('#btn-save').on('click', function() {
             calculateBudget();
-            _this.save();
-            _this.uploadImages
+            _this.save(saveImage());
         });
         $('#btn-update').on('click', function() {
             _this.update();
@@ -48,7 +47,7 @@ var main = {
             tableRow.remove();
         }
     },
-    save : function() {
+    save : function(formData) {
 
         var plan = {
             title: $('#title').val(),
@@ -84,11 +83,32 @@ var main = {
             }
         }
 
-        var allData = {
+        /*var allData = {
             plan : plan,
             datePlans : datePlans
-        }
+        }*/
 
+        //새롭게 추가된 부분
+        //formData.append('allData', JSON.stringify(allData));
+        formData.append('plan', JSON.stringify(plan));
+        formData.append('datePlans', JSON.stringify(datePlans));
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/plans',
+            data: formData,
+            //챗지피티 말로는 밑 두 줄이 중요하다고 함
+            processData: false,
+            contentType: false,
+            enctype: 'multipart/form-data'
+        }).done(function() {
+            alert('글이 등록되었습니다.');
+            window.location.href = '/planboard';
+        }).fail(function(error) {
+            alert(JSON.stringify(error));
+        });
+
+        /*
         $.ajax({
             type: 'POST',
             url: '/api/v1/plans',
@@ -100,7 +120,7 @@ var main = {
             window.location.href = '/planboard';
         }).fail(function(error) {
             alert(JSON.stringify(allData));
-        });
+        });*/
     },
     update: function() {
         var data = {

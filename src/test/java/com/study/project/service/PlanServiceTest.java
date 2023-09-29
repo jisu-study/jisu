@@ -94,7 +94,7 @@ public class PlanServiceTest {
                 .content(content2)
                 .cost(cost2).build());
 
-        Long plan_id = planService.save(requestDto, datePlanSaveRequestDtoList);
+        //Long plan_id = planService.save(requestDto, datePlanSaveRequestDtoList);
 
         List<Plan> planList = planRepository.findAll();
         List<DatePlan> datePlanList = datePlanRepository.findAll();

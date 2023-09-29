@@ -3,6 +3,7 @@ package com.study.project.service;
 import com.study.project.domain.plans.*;
 import com.study.project.domain.plans.PlanRepository;
 import com.study.project.web.dto.DatePlanSaveRequestDto;
+import com.study.project.web.dto.ImageSaveRequestDto;
 import com.study.project.web.dto.PlanListResponseDto;
 import com.study.project.web.dto.PlanSaveRequestDto;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +19,15 @@ import java.util.stream.Collectors;
 public class PlanService {
     private final PlanRepository planRepository;
     private final DatePlanRepository datePlanRepository;
+    private final ImageRepository imageRepository;
     //필수항목 기재했을 경우에만 저장이 가능하도록 하는 조건을 추가해줘야함
 
+    public void processDTOs() {
+
+    }
+
     @Transactional
-    public Long save(PlanSaveRequestDto requestDto, List<DatePlanSaveRequestDto> dpRequestDtoList) {
+    public Long save(PlanSaveRequestDto requestDto, List<DatePlanSaveRequestDto> dpRequestDtoList, List<ImageSaveRequestDto> imageSaveRequestDtoList) {
         Plan plan = requestDto.toEntity();
         planRepository.save(plan);
 
@@ -32,6 +38,16 @@ public class PlanService {
             datePlanRepository.save(datePlan);
         }
 
+        if (imageSaveRequestDtoList != null && !imageSaveRequestDtoList.isEmpty()) {
+            for (ImageSaveRequestDto imgRequestDto : imageSaveRequestDtoList) {
+                Image image = imgRequestDto.toEntity();
+                image.setPlan(plan);
+                plan.putImage(image);
+                System.out.println(image.getImgName());
+                imageRepository.save(image);
+            }
+        }
+
         return plan.getPlanId();
     }
 
@@ -40,10 +56,4 @@ public class PlanService {
         return planRepository.findAllDesc().stream()
                 .map(PlanListResponseDto::new).collect(Collectors.toList());
     }
-
-    //예산 합계 함수 추가해주기
-    //@Transactional
-    //public BigDecimal costSum(){
-    //
-    //}
 }

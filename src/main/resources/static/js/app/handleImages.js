@@ -1,28 +1,3 @@
-function uploadImages() {
-    var imageInput = document.getElementById('imageInput'); // 이미지 업로드 필드
-    var selectedFile = imageInput.files[0];
-
-    if (!selectedFile) {
-        alert('이미지를 선택하세요.');
-        return;
-    }
-
-    var formData = new FormData();
-    formData.append('image', selectedFile);
-
-    fetch('/api/v1/upload', {
-        method: 'POST',
-        body: formData,
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            alert(data.message);
-        })
-        .catch((error) => {
-            console.error('이미지 업로드 실패:', error);
-        });
-}
-
 var imagesInput = document.getElementById('images');
 var imagePreview = document.getElementById('imagePreview');
 var prevButton = document.getElementById('prevButton');
@@ -82,4 +57,31 @@ nextButton.addEventListener('click', function() {
     showImage(currentIndex);
 });
 
-export {uploadImages};
+function saveImage() {
+    if (imagesInput.files.length > 0) {
+        var formData = new FormData();
+        for (var i = 0; i < imagesInput.files.length; i++) {
+            formData.append('image', imagesInput.files[i]);
+        }
+
+        /*fetch('/api/v1/plans', {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(data) {
+            // 업로드 성공한 경우의 처리
+            console.log(data);
+        })
+        .catch(function(error) {
+            // 오류 처리
+            console.error('Error:', error);
+        });*/
+
+        return formData;
+    }
+}
+
+export {saveImage};

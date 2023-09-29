@@ -43,9 +43,17 @@ public class Plan {
     @OneToMany(mappedBy = "plan", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<DatePlan> datePlans = new ArrayList<DatePlan>();
 
+    @OneToMany(mappedBy = "plan", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Image> images = new ArrayList<Image>();
+
     public void putDatePlan(DatePlan datePlan){
         this.datePlans.add(datePlan);
         datePlan.setPlan(this);
+    }
+
+    public void putImage(Image image) {
+        this.images.add(image);
+        image.setPlan(this);
     }
 
     @Builder
