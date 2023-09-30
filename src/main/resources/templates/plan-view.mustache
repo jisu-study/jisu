@@ -58,54 +58,19 @@
         </div>
         <br>
 
-        <div class="container">
-            {{#each plan.datePlans}}
-                <table name="date_table" class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                <h5 name="dates">{{date}}</h5>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th scope="col">장소</th>
-                            <th scope="col">계획 세부 내용</th>
-                            <th scope="col">시작 시각</th>
-                            <th scope="col">종료 시각</th>
-                            <th scope="col">비용</th>
-                        </tr>
-                    </thead>
-                    <tbody name="plan_table">
-                        <tr>
-                            <td name="tour_spots">
-                                {{tourSpot}}
-                            </td>
-                            <td name="contents">
-                                {{content}}
-                            </td>
-                            <td name="start_times">
-                                {{startTime}}
-                            </td>
-                            <td name="end_times">
-                                {{endTime}}
-                            </td>
-                            <td name="costs">
-                                {{#cost}}
-                                    {{cost}}
-                                {{/cost}}
-                                {{^cost}}
-                                    0
-                                {{/cost}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            {{/each}}
-        </div>
+        {{#plan.datePlans}}
+            <div name="data_date" data-date="{{date}}"></div>
+            <div name="data_tour-spots" data-tour-spots="{{tourSpot}}"></div>
+            <div name="data_contents" data-contents="{{content}}"></div>
+            <div name="data_start-times" data-start-times="{{startTime}}"></div>
+            <div name="data_end-times" data-end-times="{{endTime}}"></div>
+            <div name="data_costs" data-costs="{{#cost}}{{cost}}{{/cost}}{{^cost}}0{{/cost}}"></div>
+        {{/plan.datePlans}}
+        <div id="tables" class="container"></div>
         <br>
 
         <div class="container">
-            <table id="budget_table">
+            <table id="budget_table" class="table n-table">
                 <thead>
                     <tr>
                         <th scope="col">여행 비용</th>
