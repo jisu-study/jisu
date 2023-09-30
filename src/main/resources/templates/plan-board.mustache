@@ -50,9 +50,11 @@
                                 <span class="card-text">{{location}}</span>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">조회</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">수정</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">삭제</button>
+                                        <button name="btn-view" type="button" class="btn btn-sm btn-outline-secondary" onClick="location.href='/plans/view/{{planId}}'">
+                                            조회
+                                        </button>
+                                        <button name="btn-go-update" type="button" class="btn btn-sm btn-outline-secondary">수정</button>
+                                        <button name="btn-delete" type="button" class="btn btn-sm btn-outline-secondary">삭제</button>
                                     </div>
                                     <small class="text-body-secondary">9 mins</small>
                                 </div>

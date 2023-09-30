@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.study.project.service.PlanService;
 import com.study.project.web.dto.DatePlanSaveRequestDto;
+import com.study.project.web.dto.PlanResponseDto;
 import com.study.project.web.dto.PlanSaveRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -30,4 +30,12 @@ public class PlansPostApiController {
 
         return planService.save(requestDto, dpSaveRequestDtoList);
     }
+
+    //조회 기능
+    /*@GetMapping("/api/v1/plans/{plan_id}")
+    public String planPostView(@RequestParam final Long planId, Model model){
+        PlanResponseDto planResponseDto = planService.findById(planId);
+        model.addAttribute("plan", planResponseDto);
+        return "plan-view";
+    }*/
 }

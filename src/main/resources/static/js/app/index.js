@@ -9,17 +9,23 @@ var main = {
             _this.save();
             _this.uploadImages
         });
-        $('#btn-update').on('click', function() {
-            _this.update();
-        });
-        $('#btn-delete').on('click', function() {
-            _this.delete();
-        });
         $('[name="btn-new-row"]').on('click', function() {
             _this.new_row($(this));
         });
         $('[name="btn-delete-row"]').on('click', function() {
             _this.deleteRow($(this));
+        });
+        //수정 페이지로 넘어가는 버튼
+        $('[name="btn-go-update"]').on('click', function() {
+
+        });
+        //수정 버튼
+        $('[name="btn-update"]').on('click', function() {
+           _this.update();
+        });
+        //삭제 버튼
+        $('[name="btn-delete"]').on('click', function() {
+           _this.delete();
         });
     },
     new_row : function(button) {

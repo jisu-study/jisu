@@ -4,6 +4,7 @@ import com.study.project.domain.plans.*;
 import com.study.project.domain.plans.PlanRepository;
 import com.study.project.web.dto.DatePlanSaveRequestDto;
 import com.study.project.web.dto.PlanListResponseDto;
+import com.study.project.web.dto.PlanResponseDto;
 import com.study.project.web.dto.PlanSaveRequestDto;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -41,9 +42,17 @@ public class PlanService {
                 .map(PlanListResponseDto::new).collect(Collectors.toList());
     }
 
-    //예산 합계 함수 추가해주기
-    //@Transactional
-    //public BigDecimal costSum(){
-    //
-    //}
+    public PlanResponseDto findById (Long planId) {
+        Plan plan = planRepository.findById(planId).orElseThrow(()->new
+                IllegalArgumentException("해당 게시글이 없습니다. id=" + planId));
+        PlanResponseDto planResponseDto = new PlanResponseDto(plan);
+
+        return planResponseDto;
+    }
+
+    /*@Transactional
+    public Long update(Long id, PlanUpdateRequestDto requestDto){
+        planRepository.update(requestDto);
+        return params.getPlanId();
+    }*/
 }

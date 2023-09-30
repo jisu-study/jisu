@@ -1,0 +1,124 @@
+{{>layout/header}}
+    <link href="/css/headers.css" rel="stylesheet">
+    <link href="/css/makePlan.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img class="bi me-2" width="40" height="32" src="/img/mango.png">
+                <span class="fs-4">망고:Man-go</span>
+            </a>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/planboard" class="nav-link px-2 link-secondary">여행계획</a></li>
+                <li><a href="#" class="nav-link px-2">여행기록</a></li>
+                <li><a href="#" class="nav-link px-2">여행정보</a></li>
+            </ul>
+
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='/signin'">로그인</button>
+                <button type="button" class="btn btn-primary">회원가입</button>
+            </div>
+        </header>
+    </div>
+    <div class="wrapper flow">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="flex-fill flex-gap">
+                    제목
+                    <h4 id="title">{{plan.title}}</h4>
+                </div>
+                <div class="flex-fill flex-gap">
+                    여행지
+                    <h4 id="location">{{plan.location}}</h4>
+                </div>
+                <div class="flex-fill flex-gap">
+                    여행 시작일
+                    <h4 id="start_date">{{plan.startDate}}</h4>
+                </div>
+                <div class="flex-fill flex-gap">
+                    여행 종료일
+                    <h4 id="end_date">{{plan.endDate}}</h4>
+                </div>
+                <div class="flex-fill flex-gap">
+                    여행 상태
+                    <h4 id="trip_state" data-trip-state="{{plan.tripState}}"></h4>
+                </div>
+                <div>
+                    <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-go-update">
+                        수정
+                    </button>
+                    <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-delete">
+                        삭제
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container">
+            {{#each plan.datePlans}}
+                <table name="date_table" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <h5 name="dates">{{date}}</h5>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="col">장소</th>
+                            <th scope="col">계획 세부 내용</th>
+                            <th scope="col">시작 시각</th>
+                            <th scope="col">종료 시각</th>
+                            <th scope="col">비용</th>
+                        </tr>
+                    </thead>
+                    <tbody name="plan_table">
+                        <tr>
+                            <td name="tour_spots">
+                                {{tourSpot}}
+                            </td>
+                            <td name="contents">
+                                {{content}}
+                            </td>
+                            <td name="start_times">
+                                {{startTime}}
+                            </td>
+                            <td name="end_times">
+                                {{endTime}}
+                            </td>
+                            <td name="costs">
+                                {{#cost}}
+                                    {{cost}}
+                                {{/cost}}
+                                {{^cost}}
+                                    0
+                                {{/cost}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            {{/each}}
+        </div>
+        <br>
+
+        <div class="container">
+            <table id="budget_table">
+                <thead>
+                    <tr>
+                        <th scope="col">여행 비용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td id="budget">{{plan.budget}}</td>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="/js/app/index.js" type="module"></script>
+    <script src="/js/app/planBoard.js"></script>
+{{>layout/footer}}

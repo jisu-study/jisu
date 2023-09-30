@@ -1,10 +1,12 @@
 package com.study.project.web;
 
 import com.study.project.service.PlanService;
+import com.study.project.web.dto.PlanResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RequiredArgsConstructor
 @Controller
@@ -29,5 +31,13 @@ public class IndexController {
     @GetMapping("/plans/save")
     public String planSave(){
         return "plan";
+    }
+
+    @GetMapping("/plans/view/{plan_id}")
+    public String planView(@PathVariable("plan_id") Long planId, Model model){
+        PlanResponseDto planResponseDto = planService.findById(planId);
+        model.addAttribute("plan", planResponseDto);
+
+        return "plan-view";
     }
 }
