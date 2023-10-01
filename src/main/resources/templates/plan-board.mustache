@@ -54,7 +54,7 @@
                                             조회
                                         </button>
                                         <button name="btn-go-update" type="button" class="btn btn-sm btn-outline-secondary">수정</button>
-                                        <button name="btn-delete" type="button" class="btn btn-sm btn-outline-secondary">삭제</button>
+                                        <button name="btn-delete" type="button" class="btn btn-sm btn-outline-secondary" data-plan-id="{{planId}}">삭제</button>
                                     </div>
                                     <small class="text-body-secondary">9 mins</small>
                                 </div>
@@ -68,5 +68,5 @@
 
     <!--js 추가-->
     <script src="/js/app/index.js" type="module"></script>
-    <script src="/js/app/planBoard.js"></script>
+    <script src="/js/app/planBoard.js" type="module"></script>
 {{>layout/footer}}

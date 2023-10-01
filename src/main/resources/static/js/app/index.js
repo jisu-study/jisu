@@ -1,5 +1,5 @@
 import { calculateBudget } from './calculateBudget.js';
-import { uploadImages } from './handleImages.js';
+//import { uploadImages } from './handleImages.js';
 
 var main = {
     init : function() {
@@ -7,7 +7,7 @@ var main = {
         $('#btn-save').on('click', function() {
             calculateBudget();
             _this.save();
-            _this.uploadImages
+            //_this.uploadImages()
         });
         $('[name="btn-new-row"]').on('click', function() {
             _this.new_row($(this));
@@ -21,11 +21,11 @@ var main = {
         });
         //수정 버튼
         $('[name="btn-update"]').on('click', function() {
-           _this.update();
+            _this.update();
         });
         //삭제 버튼
         $('[name="btn-delete"]').on('click', function() {
-           _this.delete();
+            _this.delete($(this));
         });
     },
     new_row : function(button) {
@@ -129,18 +129,18 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    delete: function() {
-        var id = $('#id').val();
+    delete: function(button) {
+        var planId = parseInt(button.attr('data-plan-id'));
 
         $.ajax({
             type: 'DELETE',
-            url: '/api/v1/posts/'+id,
+            url: '/api/v1/plans/'+planId,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function() {
             alert('글이 삭제되었습니다.');
-            window.location.href = '/';
-        }).fail(function() {
+            window.location.href = '/planboard';
+        }).fail(function(error) {
             alert(JSON.stringify(error));
         });
     }

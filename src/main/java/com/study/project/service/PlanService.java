@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,4 +56,17 @@ public class PlanService {
         planRepository.update(requestDto);
         return params.getPlanId();
     }*/
+
+    //삭제
+    @Transactional
+    public void delete(Long planId) {
+        Plan plan = planRepository.findById(planId).orElseThrow(() ->
+                new IllegalArgumentException("해당 게시글이 없습니다. plan_id=" + planId));
+
+        for (DatePlan datePlan : plan.getDatePlans()){
+            datePlanRepository.delete(datePlan);
+        }
+
+        planRepository.delete(plan);
+    }
 }

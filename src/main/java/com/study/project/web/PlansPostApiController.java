@@ -31,11 +31,10 @@ public class PlansPostApiController {
         return planService.save(requestDto, dpSaveRequestDtoList);
     }
 
-    //조회 기능
-    /*@GetMapping("/api/v1/plans/{plan_id}")
-    public String planPostView(@RequestParam final Long planId, Model model){
-        PlanResponseDto planResponseDto = planService.findById(planId);
-        model.addAttribute("plan", planResponseDto);
-        return "plan-view";
-    }*/
+    //삭제 기능
+    @DeleteMapping("/api/v1/plans/{plan_id}")
+    public Long delete(@PathVariable("plan_id") Long planId){
+        planService.delete(planId);
+        return planId;
+    }
 }
