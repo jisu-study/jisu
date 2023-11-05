@@ -42,7 +42,6 @@
                 {{#plans}}
                     <div class="col">
                         <div class="card h-100 shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xlink:href="/img/mango.png" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>망고</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">망고</text></svg>
                             <div class="card-body">
                                 <h5 class="card-title">{{title}}</h5>
                                 <span class="card-text text-muted" data-trip-state="{{tripState}}"></span>
@@ -53,7 +52,7 @@
                                         <button name="btn-view" type="button" class="btn btn-sm btn-outline-secondary" onClick="location.href='/plans/view/{{planId}}'">
                                             조회
                                         </button>
-                                        <button name="btn-go-update" type="button" class="btn btn-sm btn-outline-secondary">수정</button>
+                                        <button name="btn-go-update" type="button" class="btn btn-sm btn-outline-secondary" onClick="location.href='/plans/update/{{planId}}'">수정</button>
                                         <button name="btn-delete" type="button" class="btn btn-sm btn-outline-secondary" data-plan-id="{{planId}}">삭제</button>
                                     </div>
                                     <small class="text-body-secondary">9 mins</small>

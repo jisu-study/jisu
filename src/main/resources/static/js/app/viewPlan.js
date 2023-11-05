@@ -72,7 +72,7 @@ function extractData() {
     // 모든 div 엘리먼트를 선택합니다.
     var divElements = document.querySelectorAll('div[name^="data_"]');
 
-    idx=-1;
+    var idx=-1;
     divElements.forEach(function (divElement) {
         var nameAttribute = divElement.getAttribute('name');
         var dataKey = nameAttribute.substring(5); // "data_" 부분을 제외한 키를 추출합니다.
@@ -111,4 +111,11 @@ function groupDatePlan(datePlans) {
     return groupedDatePlans;
 }
 
-makePlanView();
+var path = location.pathname.split('/');
+
+if(path[2]==='view'){
+    makePlanView();
+}
+
+export {groupDatePlan};
+export {extractData};

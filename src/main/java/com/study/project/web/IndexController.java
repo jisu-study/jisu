@@ -40,4 +40,12 @@ public class IndexController {
 
         return "plan-view";
     }
+
+    @GetMapping("/plans/update/{plan_id}")
+    public String planUpdate(@PathVariable("plan_id") Long planId, Model model) {
+        PlanResponseDto planResponseDto = planService.findById(planId);
+        model.addAttribute("plan", planResponseDto);
+
+        return "plan-update";
+    }
 }

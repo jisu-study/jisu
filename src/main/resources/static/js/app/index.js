@@ -15,10 +15,6 @@ var main = {
         $('[name="btn-delete-row"]').on('click', function() {
             _this.deleteRow($(this));
         });
-        //수정 페이지로 넘어가는 버튼
-        $('[name="btn-go-update"]').on('click', function() {
-
-        });
         //수정 버튼
         $('[name="btn-update"]').on('click', function() {
             _this.update();

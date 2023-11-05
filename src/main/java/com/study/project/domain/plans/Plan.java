@@ -40,7 +40,7 @@ public class Plan {
 
     // 다대일 양방향이기 때문에 각 plan 별 datePlan을 저장할 list
     //plan은 DatePlan entity에서 Plan field value의 이름
-    @OneToMany(mappedBy = "plan", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "plan", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DatePlan> datePlans = new ArrayList<DatePlan>();
 
     public void putDatePlan(DatePlan datePlan){
@@ -48,8 +48,23 @@ public class Plan {
         datePlan.setPlan(this);
     }
 
+    public void deleteDatePlan(DatePlan datePlan){
+        if (!this.datePlans.isEmpty()) {
+            this.datePlans.remove(datePlan);
+        }
+    }
+
     @Builder
     public Plan(String title, String location, Date startDate, Date endDate, int tripState, BigDecimal budget){
+        this.title = title;
+        this.location = location;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tripState = tripState;
+        this.budget = budget;
+    }
+
+    public void update(String title, String location, Date startDate, Date endDate, int tripState, BigDecimal budget){
         this.title = title;
         this.location = location;
         this.startDate = startDate;

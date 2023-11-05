@@ -2,15 +2,13 @@ package com.study.project.service;
 
 import com.study.project.domain.plans.*;
 import com.study.project.domain.plans.PlanRepository;
-import com.study.project.web.dto.DatePlanSaveRequestDto;
-import com.study.project.web.dto.PlanListResponseDto;
-import com.study.project.web.dto.PlanResponseDto;
-import com.study.project.web.dto.PlanSaveRequestDto;
+import com.study.project.web.dto.*;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,17 +43,22 @@ public class PlanService {
 
     public PlanResponseDto findById (Long planId) {
         Plan plan = planRepository.findById(planId).orElseThrow(()->new
-                IllegalArgumentException("해당 게시글이 없습니다. id=" + planId));
+                IllegalArgumentException("해당 게시글이 없습니다. plan_id=" + planId));
         PlanResponseDto planResponseDto = new PlanResponseDto(plan);
 
         return planResponseDto;
     }
 
-    /*@Transactional
-    public Long update(Long id, PlanUpdateRequestDto requestDto){
-        planRepository.update(requestDto);
-        return params.getPlanId();
-    }*/
+    //수정
+    @Transactional
+    public Long update(Long planId, PlanUpdateRequestDto requestDto, List<DatePlanUpdateRequestDto> datePlanUpdateRequestDtoList) {
+        Plan plan = planRepository.findById(planId).orElseThrow(()->new
+                IllegalArgumentException("해당 게시글이 없습니다. plan_id="+ planId));
+
+        plan.update(requestDto.getTitle(), requestDto.getLocation(), requestDto.getStartDate(), requestDto.getEndDate(), requestDto.getTripState(), requestDto.getBudget());
+
+        return planId;
+    }
 
     //삭제
     @Transactional
@@ -63,10 +66,25 @@ public class PlanService {
         Plan plan = planRepository.findById(planId).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 없습니다. plan_id=" + planId));
 
-        for (DatePlan datePlan : plan.getDatePlans()){
+        /*for (DatePlan datePlan : plan.getDatePlans()){
             datePlanRepository.delete(datePlan);
-        }
+        }*/
 
         planRepository.delete(plan);
+    }
+
+    @Transactional
+    public void deleteDP(Long datePlanId) {
+        DatePlan datePlan = datePlanRepository.findById(datePlanId).orElseThrow(() ->
+                new IllegalArgumentException("해당 데이터가 없습니다. date_plan_id=" + datePlanId));
+
+        Long planId = datePlan.getPlan().getPlanId();
+
+        Plan plan = planRepository.findById(planId).orElseThrow(() ->
+                new IllegalArgumentException("해당 게시글이 없습니다. plan_id=" + planId));
+
+        plan.deleteDatePlan(datePlan);
+
+        //datePlanRepository.delete(datePlan);
     }
 }

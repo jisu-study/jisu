@@ -1,0 +1,159 @@
+{{>layout/header}}
+    <link href="/css/headers.css" rel="stylesheet">
+    <link href="/css/makePlan.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img class="bi me-2" width="40" height="32" src="/img/mango.png">
+                <span class="fs-4">망고:Man-go</span>
+            </a>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/planboard" class="nav-link px-2 link-secondary">여행계획</a></li>
+                <li><a href="#" class="nav-link px-2">여행기록</a></li>
+                <li><a href="#" class="nav-link px-2">여행정보</a></li>
+            </ul>
+
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='/signin'">로그인</button>
+                <button type="button" class="btn btn-primary">회원가입</button>
+            </div>
+        </header>
+    </div>
+    <div class="wrapper flow">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <form class="d-flex flex-gap">
+                    <div class="flex-fill">
+                        제목
+                        <input type="text" class="form-control" id="title" placeholder="여행 제목" value="{{plan.title}}">
+                    </div>
+                    <div class="flex-fill">
+                        여행지
+                        <input type="text" class="form-control" id="location" placeholder="여행지" value="{{plan.location}}">
+                    </div>
+                    <div class="flex-fill">
+                        여행 시작일
+                        <input type="date" class="form-control" id="start_date" placeholder="여행 시작일" value="{{plan.startDate}}">
+                    </div>
+                    <div class="flex-fill">
+                        여행 종료일
+                        <input type="date" class="form-control" id="end_date" placeholder="여행 종료일" value="{{plan.endDate}}">
+                    </div>
+                    <div class="flex-fill">
+                        여행 상태
+                        <select class="form-control" name="state" id="trip_state" value="{{plan.tripState}}">
+                            <option value="0">여행 전</option>
+                            <option value="1">여행 중</option>
+                            <option value="2">여행 후</option>
+                        </select>
+                    </div>
+                </form>
+                <div>
+                    <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-update">
+                        완료
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        {{#plan.datePlans}}
+            <div name="data_date" data-date="{{date}}"></div>
+            <div name="data_tour-spots" data-tour-spots="{{tourSpot}}"></div>
+            <div name="data_contents" data-contents="{{content}}"></div>
+            <div name="data_start-times" data-start-times="{{startTime}}"></div>
+            <div name="data_end-times" data-end-times="{{endTime}}"></div>
+            <div name="data_costs" data-costs="{{#cost}}{{cost}}{{/cost}}{{^cost}}0{{/cost}}"></div>
+        {{/plan.datePlans}}
+
+        <div class="container" id="tables">
+            <div>
+                <button id="btn-add-table" class="btn btn-primary">새 테이블 추가</button>
+            </div>
+            <br>
+
+            <table id="table1" class="n-table">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <form>
+                                <input type="text" class="form-control" name="dates" placeholder="여행 일차">
+                            </form>
+                        </th>
+                        <th scope="col">
+                            <button class="btn btn-primary d-inline-flex align-items-center" type="button" name="btn-new-row">행 추가</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">장소</th>
+                        <th scope="col">계획 세부 내용</th>
+                        <th scope="col">시작 시각</th>
+                        <th scope="col">종료 시각</th>
+                        <th scope="col">비용</th>
+                    </tr>
+                </thead>
+                <tbody name="plan_table">
+                    <tr>
+                        <td>
+                            <form>
+                                <input type="text" class="form-control" name="tour_spots" placeholder="장소">
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                                <input type="textarea" class="form-control" name="contents" placeholder="세부 내용">
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                                <input type="time" class="form-control" name="start_times" placeholder="시작 시각">
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                                <input type="time" class="form-control" name="end_times" placeholder="종료 시각">
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                                <input type="text" class="form-control" name="costs" placeholder="비용">
+                            </form>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary d-inline-flex align-items-center" type="button" name="btn-delete-row">행 삭제</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+
+        <div class="container">
+            <div>
+                <button class="btn btn-primary d-inline-flex align-items-center" type="button" id="btn-budget">비용 계산</button>
+            </div>
+            <br>
+
+            <table id="budget_table">
+                <thead>
+                <tr>
+                    <th scope="col">여행 비용</th>
+                </tr>
+                </thead>
+                <tbody>
+                <td id="budget">{{plan.budget}}</td>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="/js/app/index.js" type="module"></script>
+    <script src="/js/app/updatePlan.js" type="module"></script>
+    <script src="/js/app/manageTable.js" type="module"></script>
+    <script src="/js/app/calculateBudget.js" type="module"></script>
+
+{{>layout/footer}}

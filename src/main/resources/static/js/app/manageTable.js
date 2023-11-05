@@ -1,14 +1,17 @@
 import { calculateBudget } from './calculateBudget.js';
-
-var tableCounter = 1; // 새 테이블의 카운터 초기값
+var tableCounter = 0;
 
 $(document).ready(function() {
+    var lastTableId =$('#tables').children().eq(-1).attr('id');
+    var regex = /[^0-9]/g;
+    var result = lastTableId.replace(regex, "");
+    tableCounter = parseInt(result); // 새 테이블의 카운터 초기값
+
     // 새 테이블 추가 버튼 클릭 이벤트 처리
     $('#btn-add-table').on('click', function() {
-        var tableId = 'table' + tableCounter;
-
         // 테이블 복사 및 추가 함수 호출
-        newTable(tableId);
+        console.log(tableCounter);
+        newTable(tableCounter+1);
         tableCounter++; // 테이블 카운터 증가
     });
 
@@ -16,9 +19,10 @@ $(document).ready(function() {
 });
 
 // 테이블 복사 및 추가하는 함수
-function newTable(newTableId) {
+function newTable(tableId) {
     // 기존의 table1을 복사
     var clonedTable = $('#table1').clone(true);
+    var newTableId = 'table' + tableId;
 
     // 새로운 테이블의 ID 설정
     clonedTable.attr('id', newTableId);
@@ -45,5 +49,7 @@ function newTable(newTableId) {
     });
 
     // 복제한 테이블과 삭제 버튼을 컨테이너에 추가
-    $('#table'+(tableCounter-1)).after(deleteButton, clonedTable);
+    $('#table'+(tableId-1)).after(deleteButton, clonedTable);
 }
+
+export {newTable};
