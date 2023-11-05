@@ -24,13 +24,13 @@ public class PlanUpdateRequestDto {
 
 
     @Builder
-    public PlanUpdateRequestDto(String title, String location, Date startDate, Date endDate, int tripState, BigDecimal budget){
+    public PlanUpdateRequestDto(String title, String location, Date startDate, Date endDate, int tripState, BigDecimal budget, List<DatePlan> datePlans){
         this.title = title;
         this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
         this.tripState = tripState;
         this.budget = budget;
-        this.datePlans = new ArrayList<DatePlan>();
+        this.datePlans = datePlans;
     }
 }

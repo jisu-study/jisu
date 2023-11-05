@@ -51,9 +51,19 @@ public class PlanService {
 
     //수정
     @Transactional
-    public Long update(Long planId, PlanUpdateRequestDto requestDto, List<DatePlanUpdateRequestDto> datePlanUpdateRequestDtoList) {
+    public Long update(Long planId, PlanUpdateRequestDto requestDto, List<DatePlanSaveRequestDto> dpRequestDtoList) {
         Plan plan = planRepository.findById(planId).orElseThrow(()->new
                 IllegalArgumentException("해당 게시글이 없습니다. plan_id="+ planId));
+
+        List<DatePlan> datePlans = new ArrayList<DatePlan>();
+
+        plan.getDatePlans().clear();
+        for (DatePlanSaveRequestDto dpRequestDto : dpRequestDtoList) {
+            DatePlan datePlan = dpRequestDto.toEntity();
+            datePlan.setPlan(plan);
+            plan.putDatePlan(datePlan);
+            datePlanRepository.save(datePlan);
+        }
 
         plan.update(requestDto.getTitle(), requestDto.getLocation(), requestDto.getStartDate(), requestDto.getEndDate(), requestDto.getTripState(), requestDto.getBudget());
 

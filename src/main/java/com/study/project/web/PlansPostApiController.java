@@ -5,9 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.study.project.service.PlanService;
-import com.study.project.web.dto.DatePlanSaveRequestDto;
-import com.study.project.web.dto.PlanResponseDto;
-import com.study.project.web.dto.PlanSaveRequestDto;
+import com.study.project.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +27,17 @@ public class PlansPostApiController {
         List<DatePlanSaveRequestDto> dpSaveRequestDtoList = mapper.convertValue(mapper.treeToValue(requestAll.get("datePlans"), List.class), new TypeReference<List<DatePlanSaveRequestDto>>(){});
 
         return planService.save(requestDto, dpSaveRequestDtoList);
+    }
+
+    //수정 기능
+    @PutMapping("/api/v1/plans/{plan_id}")
+    public Long update(@PathVariable("plan_id") Long planId, @RequestBody ObjectNode requestAll) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        PlanUpdateRequestDto requestDto = mapper.treeToValue(requestAll.get("plan"), PlanUpdateRequestDto.class);
+        List<DatePlanSaveRequestDto> dpSaveRequestDtoList = mapper.convertValue(mapper.treeToValue(requestAll.get("datePlans"), List.class), new TypeReference<List<DatePlanSaveRequestDto>>(){});
+
+        return planService.update(planId, requestDto, dpSaveRequestDtoList);
     }
 
     //삭제 기능

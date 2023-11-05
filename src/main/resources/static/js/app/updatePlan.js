@@ -71,12 +71,12 @@ for (var date in groupedDatePlans) {
                 }
             }
 
-            $(new_tr).find('[name="btn-delete-row"]').on('click', function(button) {
-                if(button.closest('tbody').children().length == 1) {
+            $(new_tr).find('[name="btn-delete-row"]').on('click', function() {
+                if($(this).closest('tbody').children().length == 1) {
                     alert('삭제할 수 없습니다.');
                 }
                 else {
-                    var tableRow = button.closest('tr');
+                    var tableRow = $(this).closest('tr');
                     tableRow.remove();
                 }
             });

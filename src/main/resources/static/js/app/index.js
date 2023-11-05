@@ -16,7 +16,8 @@ var main = {
             _this.deleteRow($(this));
         });
         //수정 버튼
-        $('[name="btn-update"]').on('click', function() {
+        $('#btn-update').on('click', function() {
+            calculateBudget();
             _this.update();
         });
         //삭제 버튼
@@ -105,22 +106,78 @@ var main = {
         });
     },
     update: function() {
-        var data = {
-           title: $('#title').val(),
-           content: $('#content').val()
+        var path = location.pathname.split('/');
+        var planId = parseInt(path[3]);
+        console.log(planId);
+
+        var plan = {
+            title: $('#title').val(),
+            location: $('#location').val(),
+            startDate: $('#start_date').val(),
+            endDate: $('#end_date').val(),
+            tripState: $('select[name="state"]').val(),
+            budget: parseFloat($('#budget').text())
         };
 
-        var id = $('#id').val();
+        var tableCounter = $('table').length - 1;
+        var datePlans = [];
+        for (var j=1; j<=tableCounter; j++){
+            var table_name = '#table'+j+' ';
+
+            var date = $(table_name+'input[name="dates"]');
+            var tour_spots = $(table_name+'input[name="tour_spots"]');
+            var contents = $(table_name+'input[name="contents"]');
+            var start_times = $(table_name+'input[name="start_times"]');
+            var end_times = $(table_name+'input[name="end_times"]');
+            var costs = $(table_name+'input[name="costs"]');
+
+            for (var i=0 ; i<tour_spots.length; i++){
+                var tmp1 = start_times.eq(i).val().split(":");
+                var tmp2 = end_times.eq(i).val().split(":");
+
+                var start_time;
+                var end_time;
+
+                if(tmp1.length > 2){
+                    start_time = start_times.eq(i).val();
+                }
+                else{
+                    start_time = start_times.eq(i).val()+":00";
+                }
+
+                if(tmp2.length > 2){
+                    end_time = end_times.eq(i).val();
+                }
+                else{
+                    end_time = end_times.eq(i).val()+":00";
+                }
+
+                var datePlan = {
+                    date: date.val(),
+                    tourSpot: tour_spots.eq(i).val(),
+                    content: contents.eq(i).val(),
+                    startTime: start_time,
+                    endTime: end_time,
+                    cost: costs.eq(i).val()
+                };
+                datePlans.push(datePlan);
+            }
+        }
+
+        var allData = {
+            plan : plan,
+            datePlans : datePlans
+        }
 
         $.ajax({
             type: 'PUT',
-            url: '/api/v1/posts/'+id,
+            url: '/api/v1/plans/'+planId,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            data: JSON.stringify(allData)
         }).done(function() {
             alert('글이 수정되었습니다.');
-            window.location.href = '/';
+            window.location.href = '/planboard';
         }).fail(function() {
             alert(JSON.stringify(error));
         });

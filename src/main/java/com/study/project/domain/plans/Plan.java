@@ -71,5 +71,7 @@ public class Plan {
         this.endDate = endDate;
         this.tripState = tripState;
         this.budget = budget;
+        //this.datePlans.clear();
+        //this.datePlans = datePlans;
     }
 }
