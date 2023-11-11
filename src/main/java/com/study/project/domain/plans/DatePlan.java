@@ -1,6 +1,5 @@
 package com.study.project.domain.plans;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

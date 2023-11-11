@@ -7,11 +7,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.study.project.service.PlanService;
 import com.study.project.web.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController

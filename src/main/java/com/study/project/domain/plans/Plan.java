@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -48,12 +47,6 @@ public class Plan {
         datePlan.setPlan(this);
     }
 
-    public void deleteDatePlan(DatePlan datePlan){
-        if (!this.datePlans.isEmpty()) {
-            this.datePlans.remove(datePlan);
-        }
-    }
-
     @Builder
     public Plan(String title, String location, Date startDate, Date endDate, int tripState, BigDecimal budget){
         this.title = title;
@@ -71,7 +64,5 @@ public class Plan {
         this.endDate = endDate;
         this.tripState = tripState;
         this.budget = budget;
-        //this.datePlans.clear();
-        //this.datePlans = datePlans;
     }
 }

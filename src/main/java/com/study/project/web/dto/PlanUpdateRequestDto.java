@@ -1,7 +1,6 @@
 package com.study.project.web.dto;
 
 import com.study.project.domain.plans.DatePlan;
-import com.study.project.domain.plans.Plan;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

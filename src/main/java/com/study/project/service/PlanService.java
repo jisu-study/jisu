@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,25 +74,6 @@ public class PlanService {
         Plan plan = planRepository.findById(planId).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 없습니다. plan_id=" + planId));
 
-        /*for (DatePlan datePlan : plan.getDatePlans()){
-            datePlanRepository.delete(datePlan);
-        }*/
-
         planRepository.delete(plan);
-    }
-
-    @Transactional
-    public void deleteDP(Long datePlanId) {
-        DatePlan datePlan = datePlanRepository.findById(datePlanId).orElseThrow(() ->
-                new IllegalArgumentException("해당 데이터가 없습니다. date_plan_id=" + datePlanId));
-
-        Long planId = datePlan.getPlan().getPlanId();
-
-        Plan plan = planRepository.findById(planId).orElseThrow(() ->
-                new IllegalArgumentException("해당 게시글이 없습니다. plan_id=" + planId));
-
-        plan.deleteDatePlan(datePlan);
-
-        //datePlanRepository.delete(datePlan);
     }
 }

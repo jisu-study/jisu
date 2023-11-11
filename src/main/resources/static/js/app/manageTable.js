@@ -1,4 +1,5 @@
 import { calculateBudget } from './calculateBudget.js';
+
 var tableCounter = 0;
 
 $(document).ready(function() {

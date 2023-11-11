@@ -1,18 +1,14 @@
 package com.study.project.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.study.project.domain.plans.DatePlan;
 import com.study.project.domain.plans.Plan;
-import jakarta.persistence.*;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.Time;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
