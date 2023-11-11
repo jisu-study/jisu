@@ -1,0 +1,79 @@
+{{>layout/header}}
+    <title>여행 기록 리스트</title>
+
+    <link href="/css/headers.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!--header 코드 추가-->
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img class="bi me-2" width="40" height="32" src="/img/mango.png">
+                <span class="fs-4">망고:Man-go</span>
+            </a>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/planboard" class="nav-link px-2">여행계획</a></li>
+                <li><a href="/view_record_list" class="nav-link px-2 link-secondary">여행기록</a></li>
+            </ul>
+
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='/signin'">로그인</button>
+                <button type="button" class="btn btn-primary">회원가입</button>
+            </div>
+        </header>
+    </div>
+
+    <section class="py-5 text-center container">
+        <h1 class="fw-light text-center mt-4">여행 기록 리스트</h1>
+    </section>
+    <div class="container">
+        <h2>간단 여행기록 추가</h2>
+
+        <div class="container">
+            <form id="recordForm">
+                <div class="input-row">
+                    <label for="recordTitle">제목:
+                        <input type="text" id="recordTitle" value="기본 제목">
+                    </label>
+                    <label for="location">장소:
+                        <input type="text" id="location" value="기본 장소">
+                    </label>
+                    <label for="startDate">startDate:
+                        <input type="date" id="startDate">
+                    </label>
+                    <label for="endDate">endDate:
+                        <input type="date" id="endDate">
+                    </label>
+                    <input type="submit" value="Submit">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                </div>
+            </form>
+        </div>
+
+        <div class="container">
+            <h2>
+                <a href="/new_travel_record" class="button">새 여행기록 작성</a>
+            </h2>
+        </div>
+
+        <div class="container">
+            <table>
+                <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>장소</th>
+                    <th>시작 날짜</th>
+                    <th>종료 날짜</th>
+                    <th>동작</th>
+                </tr>
+                </thead>
+                <tbody id="recordList"></tbody>
+            </table>
+        </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/app/viewRecordList.js"></script>
+{{>layout/footer}}

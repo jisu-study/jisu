@@ -1,0 +1,62 @@
+{{>layout/header}}
+
+    <link href="/css/headers.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!--header 코드 추가-->
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img class="bi me-2" width="40" height="32" src="/img/mango.png">
+                <span class="fs-4">망고:Man-go</span>
+            </a>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/planboard" class="nav-link px-2">여행계획</a></li>
+                <li><a href="/view_record_list" class="nav-link px-2 link-secondary">여행기록</a></li>
+            </ul>
+
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='/signin'">로그인</button>
+                <button type="button" class="btn btn-primary">회원가입</button>
+            </div>
+        </header>
+    </div>
+
+    <section class="py-5 text-center container">
+        <h1 class="fw-light text-center mt-4">여행 기록 상세보기</h1>
+    </section>
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h2>기본 정보</h2>
+                <p class="mb-2">제목: <span id="recordTitle"></span></p>
+                <p class="mb-2">장소: <span id="location"></span></p>
+                <p class="mb-2">시작 날짜: <span id="startDate"></span></p>
+                <p class="mb-2">종료 날짜: <span id="endDate"></span></p>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container mb-5">
+            <h2 class="mb-4">비용</h2>
+            <p><span id="cost"></span></p>
+        </div>
+
+        <div class="container mb-5">
+            <h2 class="mb-4">본문</h2>
+            <p><span id="content"></span></p>
+        </div>
+    </div>
+
+    <div class="text-center mb-5">
+        <a id="updateButton" class="btn btn-primary">수정</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/app/viewDetailRecord.js"></script>
+{{>layout/footer}}

@@ -1,0 +1,104 @@
+{{>layout/header}}
+    <title>새로운 여행 기록</title>
+
+    <script> var recordId = null;</script>
+
+    <!--수정-->
+    <link href="/css/headers.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!--header 코드 추가-->
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img class="bi me-2" width="40" height="32" src="/img/mango.png">
+                <span class="fs-4">망고:Man-go</span>
+            </a>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/planboard" class="nav-link px-2">여행계획</a></li>
+                <li><a href="/view_record_list" class="nav-link px-2 link-secondary">여행기록</a></li>
+            </ul>
+
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='/signin'">로그인</button>
+                <button type="button" class="btn btn-primary">회원가입</button>
+            </div>
+        </header>
+    </div>
+
+
+    <section class="py-5 text-center container">
+        <h1 class="fw-light text-center mt-4">새로운 여행 기록</h1>
+    </section>
+
+    <div class="container">
+        <a href="/view_record_list" class="button">여행 기록 리스트로 가기</a>
+    </div>
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h2>관련 계획</h2>
+                <div class="mb-3">
+                    <label for="plans" class="form-label">관련 계획:</label>
+                    <select id="plans" class="form-select">
+                        <option value="">선택하세요</option>
+                        <option value="plan1">계획 1</option>
+                        <option value="plan2">계획 2</option>
+                        <option value="plan3">계획 3</option>
+                        <option value="plan3">계획 없음</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container mb-5">
+            <h2>기본 정보</h2>
+            <form id="recordForm" onsubmit="event.preventDefault(); handleFormSubmit();" class="row g-3">
+                <div class="col-md-3">
+                    <label for="recordTitle" class="form-label">제목</label>
+                    <input type="text" id="recordTitle" value="기본 제목" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    <label for="location" class="form-label">장소</label>
+                    <input type="text" id="location" value="기본 장소" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    <label for="startDate" class="form-label">시작 날짜</label>
+                    <input type="date" id="startDate" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    <label for="endDate" class="form-label">종료 날짜</label>
+                    <input type="date" id="endDate" class="form-control">
+                </div>
+                <div class="col-12">
+                    <button type = "button" onclick="saveTempData()">임시 저장</button>
+                </div>
+            </form>
+
+            <h2 class="mt-5">Cost</h2>
+            <p> <!--비용 관련 들어갈 부분--> </p>
+
+            <button onclick="alert(recordId);" class="btn btn-secondary mt-3">Show recordId</button>
+
+            <h2 class="mt-5">본문</h2>
+            <button id="make-template" onClick="generateContentsFields(recordId)" class="btn btn-secondary mt-3">템플릿 생성</button>
+            <div class="content-space"></div>
+            <div class="col-12">
+                <button onclick="handleFormSubmit()">최종 저장</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mb-5">
+        <a href="/view_record_list" class="btn btn-outline-primary">여행 기록 리스트로 가기</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/app/recordFunctions.js"></script>
+{{>layout/footer}}

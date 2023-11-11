@@ -1,0 +1,89 @@
+/* styles.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+
+html {
+    line-height: 1.5;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+
+.input-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.input-row label {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    border: 2px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.container h2 {
+    margin-bottom: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: auto;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+/*td:nth-child(3) {
+    visibility: hidden;
+}*/
+.secret {
+    visibility: hidden;
+}
+tr:hover .actions {
+    visibility: visible;
+}
