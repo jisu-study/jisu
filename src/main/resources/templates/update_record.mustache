@@ -29,6 +29,40 @@
         <h1 class="fw-light text-center mt-4">여행 기록 수정하기</h1>
     </section>
 
+    <div class="container">
+        <a id="detailButton" href="" class="button">현재 기록 상세 보기</a>
+        <a href="view_record_list" class="button">여행 기록 리스트로 가기</a>
+    </div>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h2>기본 정보</h2>
+                <p>제목: <input type="text" id="recordTitleInput" value=""></p>
+                <p>장소: <input type="text" id="locationInput" value=""></p>
+                <p>시작 날짜: <input type="date" id="startDateInput" value=""></p>
+                <p>종료 날짜: <input type="date" id="endDateInput" value=""></p>
+
+                <button id="saveBasicInfoButton" class="btn btn-primary mt-3">기본 정보 저장</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <h2>비용</h2>
+            <p><input type="text" id="costInput" value=""></p>
+        </div>
+
+        <div class="container">
+            <h2>본문</h2>
+            <div id="content"></div>
+
+            <button id="saveContentButton" class="btn btn-primary mt-3">본문 저장</button>
+            <!--        <button id="updateButton" class="btn btn-primary">수정</button>-->
+
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/app/updateRecord.js"></script>
 {{>layout/footer}}
